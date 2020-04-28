@@ -22,7 +22,7 @@ def ipscan():
  for i in range(1,2):
     host = thehost + str(i) + "."
     for j in  range(0,256):
-    #for j in  range(0,35):    
+    #for j in  range(0,35):        # for testing... scan less go faster
         newhost = host + str(j)
         output_ip.append(newhost)
         newhost = host
@@ -66,7 +66,11 @@ try:
     #See if there are any MAC addresses from this scan in previous scans
     for k in range(0, len(activeIPsMAC)):
         timesMAC = dataLog_df.eq(activeIPsMAC[k]).values.sum()
-        if timesMAC == 1:
+        #Make sure that only one occurence of the MAC for all logs
+        #Make sure that the one occurence of the MAC is in the most recent IP scan
+        if timesMAC == 1 and dataLog_df[dateTimeObj].str.contains(activeIPsMAC[k]).values.sum() == 1:
+            #Derek you need to make sure that this is also only in the most current scan as well
+            #Use isin series
             print("SCAN RESULTS\n")
             print("-------------------------------\n\n")
             print("A new Device has been detected on your Network!!!\n")
