@@ -1,5 +1,10 @@
 # LocalNetworkDeviceLogger
 
+Dependent module
+"pip install getmac"
+https://pypi.org/project/getmac/
+
+
 Create a read/write pickle to log MAC addresses on your local network and notify the user when a new device is connected. 
 
 The program will start by scanning all active IP addresses and then create a pandas dataframe with a timestamp.  When the program is run for a second time it will read the previous pandas dataframe (saved as a pickle) and compare the MAC addresses from all previous scans.  
